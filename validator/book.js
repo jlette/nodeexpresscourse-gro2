@@ -27,7 +27,7 @@ module.exports = {
 
         if(result.errors.length){
             const errorInputsMsg = result.errors.map(error => {
-                return error.schema.errorMessage;
+                return error.schema.errorMessage || error.message;
             }).join(" ");
 
             throw new Error(errorInputsMsg)

@@ -24,7 +24,7 @@ router.get('/:id', (req, res ) => {
     res.send(book);
 });
 
-router.post('/', bookController.create)
+router.post('/', bookController.create);
 
 router.put('/', (req, res) => {
     const newBook = req.body;
