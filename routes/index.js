@@ -3,7 +3,6 @@ const bookRouter  = require('./book');
 
 const app = express();
 
-// app.use('/books', bookRouter);
 app.use('/books', bookRouter);
 
 module.exports = app;

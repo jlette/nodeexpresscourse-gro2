@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const bookController = require('./../controllers/book');
 
 let books = [
     {
@@ -23,11 +24,7 @@ router.get('/:id', (req, res ) => {
     res.send(book);
 });
 
-router.post('/', (req, res) => {
-    const book = req.body;
-    books.push(book);
-    res.status(201).send(book);
-})
+router.post('/', bookController.create)
 
 router.put('/', (req, res) => {
     const newBook = req.body;
