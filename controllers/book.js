@@ -2,6 +2,7 @@ const BooModel = require('./../models/Book');
 const {verifyBook} = require("../validator/book");
 
 module.exports = {
+    // requete POST / pour creer un Book
     create: (req, res) => {
         try {
             verifyBook(req.body);
@@ -18,6 +19,7 @@ module.exports = {
         }
     },
 
+    // requete GET / pour recuperer l'ensemble des books
     findAll: (req, res) => {
         BooModel
             .find()
@@ -31,6 +33,7 @@ module.exports = {
             })
     },
 
+    // requete GET /:id pour récupere un book
     findBook: (req, res) => {
         const bookId = req.params.id;
         BooModel.findById(bookId)
@@ -42,6 +45,7 @@ module.exports = {
             })
     },
 
+    // requete PUT /:id mettre a jour un book
     updateBook: async (req, res) => {
         const bookId = req.params.id;
         const book = await BooModel.findById(bookId);
@@ -64,6 +68,7 @@ module.exports = {
             })
     },
 
+    // requete DELETE /:id Supprimer un book
     deleteBook: (req, res) => {
         const bookId = req.params.id;
         BooModel.findByIdAndDelete(bookId)
