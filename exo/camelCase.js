@@ -1,5 +1,5 @@
 function camelCase(str) {
-    let result = ""; // Résultat final
+    let result = ''; // Résultat final
     let capitalizeNext = true; // Indicateur pour savoir si on doit capitaliser le prochain caractère
 
     for (let i = 0; i < str.length; i++) {
@@ -15,12 +15,12 @@ function camelCase(str) {
         }
 
         // Si on rencontre un espace, on capitalise le prochain caractère
-        capitalizeNext = (currentChar === ' ');
+        capitalizeNext = currentChar === ' ';
     }
 
     return result;
 }
 
-let sentence = "hello world";
+let sentence = 'hello world';
 let camelCaseSentence = camelCase(sentence);
 console.log(camelCaseSentence); // Affichera "HelloWorld"

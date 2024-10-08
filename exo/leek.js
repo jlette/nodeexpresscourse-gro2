@@ -1,5 +1,5 @@
 function leet(str) {
-    let result = ""; // Résultat final
+    let result = ''; // Résultat final
 
     for (let i = 0; i < str.length; i++) {
         let currentChar = str[i].toLowerCase(); // On met tout en minuscule pour gérer les majuscules aussi
@@ -30,6 +30,6 @@ function leet(str) {
     return result;
 }
 
-let sentence = "anaconda";
+let sentence = 'anaconda';
 let leetSentence = leet(sentence);
 console.log(leetSentence); // Affichera "4n4c0nd4"

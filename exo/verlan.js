@@ -1,8 +1,8 @@
 function verlan(str) {
     let words = str.split(' '); // Séparer les mots de la phrase
-    let result = words.map(word => {
+    let result = words.map((word) => {
         // Inverser chaque mot
-        let reversedWord = "";
+        let reversedWord = '';
         for (let i = word.length - 1; i >= 0; i--) {
             reversedWord += word[i];
         }
@@ -13,6 +13,6 @@ function verlan(str) {
     return result.join(' ');
 }
 
-let sentence = "Hello world";
+let sentence = 'Hello world';
 let verlanSentence = verlan(sentence);
 console.log(verlanSentence); // Affichera "olleH dlrow"

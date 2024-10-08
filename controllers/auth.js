@@ -1,14 +1,14 @@
 const UserModel = require('./../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const {verifyUser} = require("../validator/user");
+const { verifyUser } = require('../validator/user');
 
 module.exports = {
     // POST /register Creer un utilisateur
     register: async (req, res) => {
         try {
             verifyUser(req.body);
-            const {firstname, lastname, email, password} = req.body;
+            const { firstname, lastname, email, password } = req.body;
             const hash = await bcrypt.hash(password, 10);
             const newUser = new UserModel({
                 firstname,
@@ -17,45 +17,49 @@ module.exports = {
                 password: hash
             });
 
-            newUser.save()
+            newUser.save();
             res.status(201).send({
                 id: newUser._id,
                 lastname: newUser.lastname,
                 firstname: newUser.firstname,
                 email: newUser.email
-            })
+            });
         } catch (error) {
             res.send({
                 message: error.message || 'Cannot register User'
-            })
+            });
         }
     },
 
     // POST /login Authentification
-    login: async  (req, res) => {
-        const {email, password} = req.body
+    login: async (req, res) => {
+        const { email, password } = req.body;
         const user = await UserModel.findOne({
-            email, // email: email
-        })
+            email // email: email
+        });
 
-        if(!user) {
+        if (!user) {
             res.status(401).send({
-                message: "User not exist"
-            })
+                message: 'User not exist'
+            });
         }
 
         const checkPassword = await bcrypt.compare(password, user.password);
         if (checkPassword) {
             //prepration des infos de jwt
             const jwtOptions = {
-                expiresIn: process.env.JWT_TIMOEOUTE_DURATION || "1h"
-            }
+                expiresIn: process.env.JWT_TIMOEOUTE_DURATION || '1h'
+            };
             const secret = process.env.JWT_SECRET || 'secret';
 
             //generation du token jwt
-            const token = jwt.sign({
-                userId: user.id,
-            }, secret, jwtOptions)
+            const token = jwt.sign(
+                {
+                    userId: user.id
+                },
+                secret,
+                jwtOptions
+            );
 
             res.send({
                 message: 'Login successfully',
@@ -65,12 +69,11 @@ module.exports = {
                     lastname: user.lastname,
                     token
                 }
-            })
-
+            });
         } else {
             res.status(401).send({
-                messsage: "Wrong login informations"
-            })
+                messsage: 'Wrong login informations'
+            });
         }
     }
-}
+};

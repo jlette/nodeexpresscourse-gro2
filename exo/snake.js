@@ -1,5 +1,5 @@
 function SnakeCase(str) {
-    let result = ""; // Résultat final
+    let result = ''; // Résultat final
 
     for (let i = 0; i < str.length; i++) {
         let currentChar = str[i];
@@ -17,6 +17,6 @@ function SnakeCase(str) {
     return result;
 }
 
-let sentence = "Hello World";
+let sentence = 'Hello World';
 let snakeCaseSentence = SnakeCase(sentence);
 console.log(snakeCaseSentence); // Affichera "hello_world"

@@ -1,5 +1,5 @@
 function capitalize(str) {
-    let result = ""; // Résultat final
+    let result = ''; // Résultat final
     let capitalizeNext = true; // Indicateur pour savoir si on doit capitaliser le prochain caractère
 
     for (let i = 0; i < str.length; i++) {
@@ -14,12 +14,12 @@ function capitalize(str) {
         }
 
         // Si on rencontre un espace, on capitalise le prochain caractère
-        capitalizeNext = (currentChar === ' ');
+        capitalizeNext = currentChar === ' ';
     }
 
     return result;
 }
 
-let sentence = "hello world";
+let sentence = 'hello world';
 let capitalizeSentence = capitalize(sentence);
 console.log(capitalizeSentence); // Affichera "Hello World"
