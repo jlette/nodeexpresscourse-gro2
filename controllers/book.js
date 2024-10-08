@@ -1,17 +1,35 @@
 const BooModel = require('./../models/Book');
+const UserModel = require('./../models/User');
 const {verifyBook} = require("../validator/book");
 
 module.exports = {
     // requete POST / pour creer un Book
-    create: (req, res) => {
+    create: async (req, res) => {
         try {
             verifyBook(req.body);
+            const author = await UserModel.findById(req.body.author);
+            if(!author) {
+                res.status(400).send({
+                    message: "Author not exist"
+                })
+            }
             const newBook = new BooModel({
                 name: req.body.name,
-                description: req.body.description
+                description: req.body.description,
+                author
             });
             newBook.save();
-            res.status(201).send(newBook);
+            const {_id, name, description, author: authorBook}  = newBook;
+            res.status(201).send({
+                id: _id,
+                name,
+                description,
+                author: {
+                    id: authorBook._id,
+                    firstname: authorBook.firstname,
+                    lastname: authorBook.lastname
+                }
+            });
         } catch (error) {
             res.status(400).send({
                 message: error.message || 'Something Wrong'

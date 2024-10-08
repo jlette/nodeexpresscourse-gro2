@@ -34,19 +34,17 @@ module.exports = {
     // POST /login Authentification
     login: async  (req, res) => {
         const {email, password} = req.body
-        const user = UserModel.findOne({
-            where: {
-                email,
-            }
+        const user = await UserModel.findOne({
+            email, // email: email
         })
 
         if(!user) {
             res.status(401).send({
-                messsage: "User not exist"
+                message: "User not exist"
             })
         }
 
-        const checkPassword = bcrypt.compare(password, user.password);
+        const checkPassword = await bcrypt.compare(password, user.password);
         if (checkPassword) {
             //prepration des infos de jwt
             const jwtOptions = {

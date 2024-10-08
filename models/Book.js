@@ -9,6 +9,9 @@ const BookSchema = new mongoose.Schema({
     description: {
         type: String,
     },
+    author: {
+        type: Schema.ObjectId, ref: 'User'
+    }
 }, {timestamps: true})
 
 const Book  = mongoose.model('Book', BookSchema);
